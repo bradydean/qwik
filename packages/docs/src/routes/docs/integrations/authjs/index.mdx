@@ -148,6 +148,44 @@ export default component$(() => {
 });
 ```
 
+### getSession
+
+A convience function to retrieve a session or null if there is no session. 
+
+#### Parameters
+
+* `requestEvent`: A RequestEvent object.
+
+Example using `getSession` in a route action:
+
+```tsx
+import { getSession } from "~/routes/plugin@auth";
+
+export const submitAction = routeAction$((data, requestEvent) => {
+  const session = getSession(requestEvent);
+  if (session) {
+    // Do something with the session
+  } else {
+    // No session
+  }
+});
+```
+
+Example using `getSession` in a server$
+
+```tsx
+import { getSession } from "~/routes/plugin@auth";
+
+const action = server$(function(input: string) {
+  const session = getSession(this);
+  if (session) {
+    // Do something with the session
+  } else {
+    // No session
+  }
+})
+```
+
 ## REST API
 
 All the same REST APIs as provided by Auth.js are available.

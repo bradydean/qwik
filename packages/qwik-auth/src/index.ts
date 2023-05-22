@@ -150,8 +150,8 @@ export function serverAuthQrl(authOptions: QRL<(ev: RequestEventCommon) => QwikA
     }
   };
 
-  const getSession = async (requestEvent: RequestEvent): Promise<Session | null> => {
-    return authOptions(requestEvent).then((auth) => getSessionData(requestEvent.request, auth));
+  const getSession = (requestEvent: RequestEvent): Session | null => {
+    return requestEvent.sharedMap.get('session') as Session | null;
   };
 
   return {
