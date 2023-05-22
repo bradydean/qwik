@@ -150,10 +150,15 @@ export function serverAuthQrl(authOptions: QRL<(ev: RequestEventCommon) => QwikA
     }
   };
 
+  const getSession = async (requestEvent: RequestEvent): Promise<Session | null> => {
+    return authOptions(requestEvent).then((auth) => getSessionData(requestEvent.request, auth));
+  };
+
   return {
     useAuthSignin,
     useAuthSignout,
     useAuthSession,
+    getSession,
     onRequest,
   };
 }
